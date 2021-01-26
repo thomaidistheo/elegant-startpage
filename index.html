@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StartHub JS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light">
+
+    <div class="app-container">
+        <div class="header-container">
+            <div class="header">
+    
+                <div class="welcome-msg"></div>
+                
+                <form class="search-form" action="http://www.google.com/search" method="get">
+                    <input 
+                        type="text" 
+                        name="q" 
+                        autoComplete="off" 
+                        placeholder="Search"
+                    />
+                </form>
+                <div class="date-theme">
+                    <div class="current-date">{day} | {time}</div>
+                    <button class="theme"><img src=assets/sun.png alt=""/></button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="dashboard-container">
+            <div class="">
+                <div class="todo-title">
+                    <div class="todo-text">Todo</div>
+                    <button class="todo-add">+</button>
+                </div>
+        
+                <div class="todo-container">
+                    <div class="todo-list">
+                        <ul>
+                            <li class="todo-item">twefgewfgew</li>
+                            <li class="todo-item">gwegvwevewew</li>
+                            <li class="todo-item">hgbrewghbewrg</li>
+                            <li class="todo-item">ghberghber</li>
+                            <li class="todo-item">hbrehbger</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+            <div>
+                <div class="notes-title">
+                    <div class="notes-text">Notes</div>
+                    <button class="notes-add">+</button>
+                </div>
+                <div class="notes-container">
+                    <form class="note-input-container hidden">
+                        <textarea class="note-input"></textarea>
+                        <button class="note-done">DONE</button>
+                    </form>
+                    <div class="notes-list">
+                        <ul id="notes-list">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="bookmarks-container">
+            <div class="bookmarks-list">
+                 <ul id="bookmarks-list">
+
+                    <div>
+                        <button class="new-bookmark-btn">Add New</button>
+                    </div>
+                 </ul>
+                 <form action="submit" class="bookmark-input hidden" id="bookmark-input-form">
+                     <input id="bookmark-input" type="text" placeholder="Add new bookmark link">
+                     <button type="submit" class="add-btn">Add</button>
+                     <button type="button" class="cancel-btn">Cancel</button>
+                 </form>
+            </div>
+         </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
