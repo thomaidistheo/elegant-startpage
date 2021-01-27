@@ -166,53 +166,49 @@ const noteInput = document.querySelector('.note-input')
 const noteDoneBtn = document.querySelector('.note-done')
 const notesList = document.getElementById('notes-list')
 
-const notesArr = ['note1', 'note2']
-
-const notesInputArr = () => {
-    notesArr.push(noteInput.value)
-    localStorage.setItem("notes", JSON.stringify(notesArr))
-    console.log('notesArr:')
-    console.log(notesArr)
-}
-
+// toggle text input
 newNoteBtn.onclick = () => {
     noteInputCont.classList.toggle('hidden')
 }
 
-createNewNoteArr = () => {
-    notesArr.forEach((note) => {
-        const newLi = document.createElement('li')
-        const text = document.createTextNode(note)
-        newLi.appendChild(text)
-        newLi.classList.add('note-item')
-        notesList.appendChild(newLi)
-    })
+// initialize temp array and stored notes array
+let notesArr = []
+let storedNotes = JSON.parse(localStorage.getItem("notes"))
+
+// sync temp array with stored array then update stored array
+notesArrUpdate = () => {
+    if (storedNotes !== null) {
+        notesArr = storedNotes
+    } 
+    notesArr.push(noteInput.value)
+    localStorage.setItem("notes", JSON.stringify(notesArr))
 }
 
-createNewNote = () => {
+// create the note element
+createNewNote = (e) => {
     const newLi = document.createElement('li')
-    const text =  document.createTextNode(noteInput.value)
+    const text =  document.createTextNode(e)
     newLi.appendChild(text)
     newLi.classList.add('note-item')
     notesList.appendChild(newLi)
 }
 
+// POPULATE NOTES  ----------
+// pull notes array from local storage
 displayNotes = () => {
-    const storedNotes = JSON.parse(localStorage.getItem("notes"))
     if (storedNotes !== null) {
         storedNotes.forEach((note) => {
-            createNewNote()
+            // createNewNoteArr(note)
+            createNewNote(note)
         })
     } else return
-
-    console.log(storedNotes)
 }
+// show the stored notes on load
+window.onload = displayNotes()
 
-displayNotes()
-createNewNoteArr()
-
+// adding new note
 noteDoneBtn.onclick = (e) => {
     e.preventDefault()
-    notesInputArr()
-    createNewNote()
+    createNewNote(noteInput.value)
+    notesArrUpdate()
 }
