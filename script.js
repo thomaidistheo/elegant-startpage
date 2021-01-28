@@ -29,17 +29,19 @@ if (theme) {
 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 let today = new Date()
-let hours = today.getHours()
-let minutes = today.getMinutes()
-let time =  hours + ":" + minutes
 let day = today.getDate() + " " + monthNames[today.getMonth()] + " " + today.getFullYear()
 
-let welcomeMsg = document.querySelector('.welcome-msg')
-hours < 12 ? welcomeMsg.innerHTML = "Good morning, Theo" : welcomeMsg.innerHTML = "Good afternoon, Theo"
-
 let dateTime = document.querySelector('.current-date')
-dateTime.innerHTML = day + "&nbsp | &nbsp" + time
-
+function time() {
+    var d = new Date();
+    var s = d.getSeconds();
+    var m = d.getMinutes();
+    var h = d.getHours();
+    dateTime.textContent = 
+    day + " // " + ("0" + h).substr(-2) + ":" + ("0" + m).substr(-2)
+  }
+  
+  setInterval(time, 1000);
 
 // & ----------------------------------------------------------------
 // & ADD BOOKMARKS ----------------------------------------------------------------
