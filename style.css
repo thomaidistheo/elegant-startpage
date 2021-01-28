@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+::selection {
+    background: var(--primary-clr); /* WebKit/Blink Browsers */
+  }
+::-moz-selection {
+    background: var(--text-clr); /* Gecko Browsers */
+    color: var(--primary-clr);
+  }
 
 body {
 margin: 0;
@@ -20,6 +27,10 @@ transition: background 250ms ease, color 800ms ease;
 code {
 font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+button {
+    outline: none;
 }
 
 :root {
@@ -54,6 +65,21 @@ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 
 .hidden { 
     display: none!important;
+}
+
+.opacity {
+    opacity: 0.5;
+}
+
+@keyframes rotate {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(45deg);}
+}
+
+.rotate {
+    animation-name: rotate;
+    animation-duration: 250ms;
+    transform: rotate(45deg);
 }
 
 .app-container {
@@ -157,11 +183,12 @@ font-size: 1rem;
 .todo-container,
 .notes-container {
     height: 550px;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
 
-    padding: 10px 30px;
+    padding: 10px 15px;
 
     overflow: auto;
     -ms-overflow-style: none; /* IE 11 */
@@ -191,6 +218,19 @@ font-size: 1rem;
     background: var(--bg-mid-clr);
 }
 
+.todo-title-text,
+.notes-title-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.todo-title-text img,
+.notes-title-text img {
+    width: 25px;
+    height: auto;
+}
+
 .todo-list ul,
 .notes-list ul {
     list-style-type: none;
@@ -205,13 +245,26 @@ font-size: 1rem;
 .note-item {
     min-height: 40px;
 
-    padding: 10px;
+    padding: 20px;
     color: var(--text-clr);
+    border-left: 2px solid rgb(185, 157, 98, 0.4);
 
     display: flex;
     align-items: center;
 
     background: var(--bg-sec-clr);
+
+    transition: all 100ms ease;
+}
+
+.todo-item:hover, 
+.note-item:hover {
+    border-left: 5px solid var(--primary-clr);
+}
+
+.todo-item .del-btn,
+.note-item .del-btn {
+    margin-left: 20px;
 }
 
 .todo-add,
@@ -221,6 +274,7 @@ font-size: 1rem;
     color: var(--primary-clr);
     font-size: 1.5rem;
     cursor: pointer;
+    transform: rotatte(0deg)
 }
 
 /* & ------------------------------------------- */
@@ -233,7 +287,7 @@ font-size: 1rem;
 .note-input-container {
     width: 100%;
     display: grid;
-    grid-template-columns: 5fr 1fr;
+    grid-template-columns: 1fr;
     align-items: center;
     gap: 10px;
 }
@@ -253,6 +307,9 @@ font-size: 1rem;
 .note-done {
     height: 30px;
     width: 100px;
+
+    justify-self: end;
+    margin-bottom: 25px;
 
     background: none;
     border: 1px solid var(--primary-clr);
@@ -377,11 +434,17 @@ font-size: 1rem;
     border: 2px solid var(--error-hover-clr); 
 }
 
-.li-flex {
+.li-flex-reverse {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex-direction: row-reverse;
     gap: 5px;
+}
+
+.li-flex {
+    display: grid;
+    grid-template-columns: 94% 6%;
 }
 
 .del-btn {
@@ -442,6 +505,13 @@ font-size: 1rem;
     height: 32px;
 }
 
+.note-input-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    gap: 0;
+}
+
 @media (max-width: 830px) {
 
 .header {
@@ -483,5 +553,4 @@ font-size: 1rem;
     padding-bottom: 50px;
     
     gap: 0;
-}
 }

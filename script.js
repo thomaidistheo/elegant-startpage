@@ -58,10 +58,7 @@ let bookmarksArr = []
 
 // Creates new array with newly added LIs to store in Local Storage
 const inputArr = () => {
-    // createBookmark()
     bookmarksArr.push(newBookmarkInput.value)
-    // const newIndex = bookmarksArr.indexOf(newBookmarkInput.value)
-    // index = newIndex
     localStorage.setItem("bookmarks", JSON.stringify(bookmarksArr))
 }
 
@@ -78,8 +75,8 @@ const createBookmarksArr = () => {
             const linkText = document.createTextNode(bookmark)
     
             newA.appendChild(linkText)
-            newA.setAttribute("href", `//${linkText.data}`)
-            newA.innerHTML = linkText.data.split(".", 2).pop() // remove www and .com
+            newA.setAttribute("href", `//www.${linkText.data}`)
+            newA.innerHTML = linkText.data.split(".", 1).pop() // remove www and .com
             newLi.appendChild(newA)
             
             // delete button
@@ -88,7 +85,7 @@ const createBookmarksArr = () => {
             delBtn.innerText = "X"
             delBtn.classList.add('del-btn')
 
-            newLi.classList.add('li-flex')
+            newLi.classList.add('li-flex-reverse')
 
             bookmarkList.prepend(newLi) // prepend STORED li items to ul
 
@@ -113,29 +110,6 @@ window.onload = createBookmarksArr()
 const handleDelete = (index) => {
     bookmarksArr.splice(index, 1)
 }
-
-// // creates bookmark LIs when a new one is added 
-// const createBookmark = () => {
-//     const newLi = document.createElement('li')
-//     const newA = document.createElement('a')
-//     const linkText = document.createTextNode(newBookmarkInput.value)
-
-//     newA.appendChild(linkText)
-//     newA.setAttribute("href", `//${linkText.data}`)
-//     newA.innerHTML = linkText.data.split(".", 2).pop() // remove www and .com
-//     newLi.appendChild(newA)
-
-//     bookmarkList.prepend(newLi) // prepend NEW li items to ul
-
-//     // delete button
-//     const delBtn = document.createElement('button')
-//     delBtn.innerText = "DELETE"
-//     delBtn.classList.add('del-btn')
-//     newLi.appendChild(delBtn)
-// }
-
-// Runs when page loads to populate the bookmarks section using the stored local storage
-// createBookmarksArr()
 
 // button functionality for the bookmark form
 newBookmarkBtn.onclick = () => {
@@ -164,33 +138,52 @@ const newNoteBtn = document.querySelector('.notes-add')
 const noteInputCont = document.querySelector('.note-input-container')
 const noteInput = document.querySelector('.note-input')
 const noteDoneBtn = document.querySelector('.note-done')
-const notesList = document.getElementById('notes-list')
+const notesList = document.querySelector('#notes-list')
+
+
 
 // toggle text input
 newNoteBtn.onclick = () => {
     noteInputCont.classList.toggle('hidden')
+    newNoteBtn.classList.toggle('rotate')
 }
 
 // initialize temp array and stored notes array
 let notesArr = []
 let storedNotes = JSON.parse(localStorage.getItem("notes"))
 
-// sync temp array with stored array then update stored array
+// sync temp array with stored array then store updated array
 notesArrUpdate = () => {
     if (storedNotes !== null) {
         notesArr = storedNotes
     } 
     notesArr.push(noteInput.value)
     localStorage.setItem("notes", JSON.stringify(notesArr))
+    noteInput.value = ''
 }
 
 // create the note element
 createNewNote = (e) => {
+    //create li element with note text from either input value or stored notes
     const newLi = document.createElement('li')
-    const text =  document.createTextNode(e)
-    newLi.appendChild(text)
+    newLi.innerText = e
     newLi.classList.add('note-item')
-    notesList.appendChild(newLi)
+    notesList.prepend(newLi)
+
+    //create delete btn
+    const delBtn = document.createElement('button')
+    newLi.appendChild(delBtn)
+    delBtn.innerText = "X"
+    delBtn.classList.add('del-btn')
+    newLi.classList.add('li-flex')
+
+    const noteIndex = storedNotes.indexOf(e)
+    delBtn.onclick = (e) => {
+        storedNotes.splice(noteIndex, 1)
+        e.target.parentElement.remove()
+        //update the stored notes
+        localStorage.setItem("notes", JSON.stringify(storedNotes))
+    }
 }
 
 // POPULATE NOTES  ----------
@@ -209,6 +202,11 @@ window.onload = displayNotes()
 // adding new note
 noteDoneBtn.onclick = (e) => {
     e.preventDefault()
-    createNewNote(noteInput.value)
-    notesArrUpdate()
+    if (noteInput.value === '') {
+        noteDoneBtn.setAttribute('disabled', true)
+        noteDoneBtn.classList.add('opacity')
+    } else {
+        createNewNote(noteInput.value)
+        notesArrUpdate()
+    }
 }

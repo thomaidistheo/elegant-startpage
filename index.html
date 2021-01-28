@@ -30,9 +30,12 @@
         </div>
     
         <div class="dashboard-container">
-            <div class="hidden">
+            <div>
                 <div class="todo-title">
-                    <div class="todo-text">Todo</div>
+                    <div class="todo-title-text">
+                        <img src="/assets/todo-icon.png" alt="notes icon">
+                        <span>Tasks</span>
+                    </div>
                     <button class="todo-add">+</button>
                 </div>
         
@@ -51,7 +54,10 @@
         
             <div>
                 <div class="notes-title">
-                    <div class="notes-text">Notes</div>
+                    <div class="notes-title-text">
+                        <img src="/assets/notes-icon.png" alt="notes icon">
+                        <span>Notes</span>
+                    </div>
                     <button class="notes-add">+</button>
                 </div>
                 <div class="notes-container">
@@ -74,7 +80,12 @@
                     <button class="new-bookmark-btn">Add New</button>
                  </ul>
                  <form action="submit" class="bookmark-input hidden" id="bookmark-input-form">
-                     <input id="bookmark-input" type="text" placeholder="Add new bookmark link">
+                     <input 
+                        id="bookmark-input" 
+                        type="text" 
+                        placeholder="example.com" 
+                        autocomplete="off" 
+                     />
                      <button type="submit" class="add-btn">Add</button>
                      <button type="button" class="cancel-btn">Cancel</button>
                  </form>
