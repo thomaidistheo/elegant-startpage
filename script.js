@@ -165,7 +165,7 @@ let storedNotes = JSON.parse(localStorage.getItem("notes"))
 notesArrUpdate = () => {
     if (storedNotes !== null) {
         notesArr = storedNotes
-    } 
+    } else return
     notesArr.push(noteInput.value)
     localStorage.setItem("notes", JSON.stringify(notesArr))
     noteInput.value = ''
