@@ -32,13 +32,19 @@ let today = new Date()
 let day = today.getDate() + " " + monthNames[today.getMonth()] + " " + today.getFullYear()
 
 let dateTime = document.querySelector('.current-date')
+let welcomeMsg = document.querySelector('.welcome-msg')
 function time() {
     var d = new Date();
-    var s = d.getSeconds();
     var m = d.getMinutes();
     var h = d.getHours();
     dateTime.textContent = 
     day + " // " + ("0" + h).substr(-2) + ":" + ("0" + m).substr(-2)
+
+    if (h<12) {
+        welcomeMsg.textContent = "Good morning"
+    } else {
+        welcomeMsg.textContent = "Good afternoon"
+    }
   }
   
   setInterval(time, 1000);
@@ -78,6 +84,7 @@ const createBookmarksArr = () => {
     
             newA.appendChild(linkText)
             newA.setAttribute("href", `//www.${linkText.data}`)
+            newA.setAttribute("target", "_blank")
             newA.innerHTML = linkText.data.split(".", 1).pop() // remove www and .com
             newLi.appendChild(newA)
             
@@ -114,20 +121,20 @@ const handleDelete = (index) => {
 }
 
 // button functionality for the bookmark form
+newBookmarkForm.onsubmit = (e) => {
+    e.preventDefault()
+    location.reload()
+    inputArr()
+    newBookmarkForm.classList.toggle('hidden')
+    bookmarkList.classList.toggle('hidden')
+}
+
 newBookmarkBtn.onclick = () => {
     newBookmarkForm.classList.toggle('hidden')
     bookmarkList.classList.toggle('hidden')
 }
 
 newBookmarkCancel.onclick = () => {
-    newBookmarkForm.classList.toggle('hidden')
-    bookmarkList.classList.toggle('hidden')
-}
-
-newBookmarkForm.onsubmit = (e) => {
-    e.preventDefault()
-    location.reload()
-    inputArr()
     newBookmarkForm.classList.toggle('hidden')
     bookmarkList.classList.toggle('hidden')
 }

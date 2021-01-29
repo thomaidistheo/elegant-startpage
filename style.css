@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@100;300;400;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -6,27 +8,21 @@
 
 ::selection {
     background: var(--primary-clr); /* WebKit/Blink Browsers */
-  }
+}
 ::-moz-selection {
     background: var(--text-clr); /* Gecko Browsers */
     color: var(--primary-clr);
-  }
-
-body {
-margin: 0;
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-background: var(--bg-mid-clr);
-
-transition: background 250ms ease, color 800ms ease;
 }
 
-code {
-font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+    margin: 0;
+    font-family: 'Sarabun', sans-serif;
+    line-height: 1.3rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--bg-mid-clr);
+
+    transition: background 250ms ease, color 800ms ease;
 }
 
 button {
@@ -112,7 +108,8 @@ button {
 }
 
 .welcome-msg {
-    font-weight: 700;   
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
 .current-date { 
@@ -129,7 +126,7 @@ font-size: 1rem;
 .search-form input{
     width: 50%;
     height: 30px;
-    border: 2px solid var(--primary-clr);
+    border: 1px solid var(--primary-clr);
     outline: 0;
     padding: 5px 15px;
 
@@ -174,7 +171,7 @@ font-size: 1rem;
     display: grid;
     grid-template-columns: 1fr 2fr;
     align-items: center;
-    gap: 100px;
+    gap: 50px;
 
     padding-left: 100px;
     padding-right: 100px;
@@ -211,8 +208,6 @@ font-size: 1rem;
 
     border-top: 7px solid var(--primary-clr);
     padding: 10px 15px;
-    font-size: 1.2rem;
-    color: var(--text-clr);
 
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     background: var(--bg-mid-clr);
@@ -223,6 +218,10 @@ font-size: 1rem;
     display: flex;
     align-items: center;
     gap: 10px;
+    
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-clr);
 }
 
 .todo-title-text img,
@@ -297,8 +296,8 @@ font-size: 1rem;
     border: 1px solid var(--primary-clr);
     resize: vertical;
     color: var(--text-clr);
-    font-size: 1.2rem;
-    padding: 5px;
+    font-family: inherit;
+    padding: 5px 10px;
     height: 100px;
     outline: none;
     margin-bottom: 10px;
@@ -359,14 +358,15 @@ font-size: 1rem;
 
 .new-bookmark-btn {
     background: none;
-    border: 2px solid var(--primary-clr);
-    outline: 2px solid var(--primary-clr);
-    outline-offset: -2px;
-    padding: 5px 15px;
+    border: 1px solid var(--primary-clr);
+    outline: 1px solid var(--primary-clr);
+    outline-offset: -1px;
+    padding: 2px 12px 5px 12px;
     cursor: pointer; 
     color: var(--primary-clr);
     text-transform: uppercase;
-    font-size: inherit;
+    font-size: 1rem;
+    opacity: 0.4;
 
     transition: background 250ms ease, color 500ms ease, outline-offset 250ms ease;
 }
@@ -375,6 +375,7 @@ font-size: 1rem;
     background: var(--primary-clr);
     color: var(--text-clr);
     outline-offset: 3px;
+    opacity: 1;
 }
 
 .bookmark-input {
@@ -549,8 +550,5 @@ font-size: 1rem;
 
     align-items: start;
     justify-items: stretch;
-
-    padding-bottom: 50px;
-    
     gap: 0;
 }
