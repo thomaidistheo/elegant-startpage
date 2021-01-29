@@ -165,7 +165,7 @@ let storedNotes = JSON.parse(localStorage.getItem("notes"))
 notesArrUpdate = () => {
     if (storedNotes !== null) {
         notesArr = storedNotes
-    } else return
+    }
     notesArr.push(noteInput.value)
     localStorage.setItem("notes", JSON.stringify(notesArr))
     noteInput.value = ''
@@ -186,8 +186,8 @@ createNewNote = (e) => {
     delBtn.classList.add('del-btn')
     newLi.classList.add('li-flex')
 
-    const noteIndex = storedNotes.indexOf(e)
     delBtn.onclick = (e) => {
+        const noteIndex = storedNotes.indexOf(e)
         storedNotes.splice(noteIndex, 1)
         e.target.parentElement.remove()
         //update the stored notes
