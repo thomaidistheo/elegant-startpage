@@ -162,76 +162,83 @@ emptyNotesBtn.onclick = (e) => {
     newNoteBtn.classList.toggle('rotate')
 }
 
-// initialize temp array and stored notes array
-let notesArr = []
-let storedNotes = JSON.parse(localStorage.getItem("notes"))
-
-// if notes list is empty display a message
-handleEmptyNotes = () => {
-    if (storedNotes.length < 1) {
-        emptyNotesMsg.classList.remove('hidden')
-    } else {
-        emptyNotesMsg.classList.add('hidden')
-    }
+showNotesMsg = () => {
+    emptyNotesMsg.classList.remove('hidden')
+    emptyNotesBtn.classList.remove('hidden')
 }
 
-// sync temp array with stored array then store updated array
-notesArrUpdate = () => {
-    if (storedNotes !== null) {
-        notesArr = storedNotes
-    }
-    notesArr.push(noteInput.value)
+hideNotesMsg = () => {
     emptyNotesMsg.classList.add('hidden')
-    localStorage.setItem("notes", JSON.stringify(notesArr))
-    noteInput.value = ''
+    emptyNotesBtn.classList.add('hidden')
 }
 
-// create the note element
-createNewNote = (e) => {
-    //create li element with note text from either input value or stored notes
-    const newLi = document.createElement('li')
-    newLi.innerText = e
-    newLi.classList.add('note-item')
-    newLi.classList.add('li-flex')
-    notesList.prepend(newLi)
+// create note item 
+createNote = (val) => {
+    // create li
+    const li = document.createElement('li')
+    li.innerText = val
+    li.classList.add('todo-item')
+    li.classList.add('li-flex')
+    notesList.prepend(li)
 
-    //create delete btn
+    // create del btn
     const delBtn = document.createElement('button')
-    newLi.appendChild(delBtn)
-    delBtn.innerText = "X"
     delBtn.classList.add('del-btn')
+    delBtn.innerText = "X"
+    li.appendChild(delBtn)
 
     delBtn.onclick = (e) => {
-        const noteIndex = storedNotes.indexOf(e)
-        storedNotes.splice(noteIndex, 1)
         e.target.parentElement.remove()
-        //update the stored notes
-        localStorage.setItem("notes", JSON.stringify(storedNotes))
+        deleteNote(val)
+    }
 
-        handleEmptyNotes()
+    hideNotesMsg()
+}
+
+// delete note item 
+deleteNote = val => {
+    notesArr = JSON.parse(localStorage.getItem('notes'))
+    const noteIndex = notesArr.indexOf(val)
+    notesArr.splice(noteIndex, 1)
+    localStorage.setItem('notes', JSON.stringify(notesArr))
+
+    if (notesArr.length < 1) {
+        showNotesMsg()
     }
 }
 
-// POPULATE NOTES  ----------
-// pull notes array from local storage
+// store note items to local storage
+storeNotes = val => {
+    notesArr = JSON.parse(localStorage.getItem('item'))
+    if (notesArr !== null) {
+        notesArr.push(val)
+        localStorage.setItem('notes', JSON.stringify(notesArr))
+    } else {
+        let notesArr = []
+        notesArr.push(val)
+        localStorage.setItem('notes', JSON.stringify(notesArr))
+    }
+}
+
+// populate UI
 displayNotes = () => {
-    handleEmptyNotes()
-    if (storedNotes !== null) {
-        storedNotes.forEach((note) => {
-            createNewNote(note)
+    let notesArr = JSON.parse(localStorage.getItem('notes'))
+    if (notesArr !== null) {
+        notesArr.forEach((note) => {
+            createNote(note)
+            hideNotesMsg()
         })
     } else return
 }
-// show the stored notes on load
-window.onload = displayNotes()
 
-// adding new note
-noteDoneBtn.onclick = (e) => {
+displayNotes()
+
+// adding new note 
+noteDoneBtn.onclick = e => {
     e.preventDefault()
-    createNewNote(noteInput.value)
-    notesArrUpdate()
+    createNote(noteInput.value)
+    storeNotes(noteInput.value)
 }
-
 
 // & ----------------------------------------------------------------
 // & TODO ----------------------------------------------------------------
@@ -244,8 +251,7 @@ const todoInput = document.querySelector('.todo-input')
 const todoDoneBtn = document.querySelector('.todo-done')
 const todoList = document.querySelector('#todo-list')
 const emptyTodosMsg = document.querySelector('.empty-todo-msg')
-const emptyTodoBtn = document.querySelector('.empty-todo-btn')
-
+const emptyTodosBtn = document.querySelector('.empty-todo-btn')
 
 // toggle text input
 newTodoBtn.onclick = () => {
@@ -253,91 +259,86 @@ newTodoBtn.onclick = () => {
     newTodoBtn.classList.toggle('rotate')
 }
 
-emptyTodoBtn.onclick = (e) => {
+emptyTodosBtn.onclick = (e) => {
     todoInputCont.classList.toggle('hidden')
     newTodoBtn.classList.toggle('rotate')
 }
 
-// initialize temp array and stored todos array
-let todosArr = []
-let storedTodos = JSON.parse(localStorage.getItem("todos"))
-
-// if task list is empty display a message
-handleEmptyTodos = () => {
-    if (storedTodos.length <1) {
-        emptyTodosMsg.classList.remove('hidden')
-    } else {
-        emptyTodosMsg.classList.add('hidden')
-    }
+showTodosMsg = () => {
+    emptyTodosMsg.classList.remove('hidden')
+    emptyTodosBtn.classList.remove('hidden')
 }
 
-//sync temp array with stored array then store updated array
-todosArrUpdate = () => {
-    if (storedTodos !== null) {
-        todosArr = storedTodos
-    }
-    todosArr.push(todoInput.value)
-    localStorage.setItem("todos", JSON.stringify(todosArr))
-    todoInput.value = ''
+hideTodosMsg = () => {
+    emptyTodosMsg.classList.add('hidden')
+    emptyTodosBtn.classList.add('hidden')
 }
 
-// create the todo element
-createNewTodo = (e) => {
-    //crete li element with todo text from either input value or stored todos
-    const newLi = document.createElement('li')
-    newLi.innerText = e
-    newLi.classList.add('todo-item')
-    newLi.classList.add('li-flex')
-    todoList.prepend(newLi)
+// create todo item
+createTodo = (val) => {
+    // create li
+    const li = document.createElement('li')
+    li.innerText = val
+    li.classList.add('todo-item')
+    li.classList.add('li-flex')
+    todoList.prepend(li)
 
-    //create btn container
-    const btnsCont = document.createElement('div')
-    newLi.appendChild(btnsCont)
-
-    //create completed todo btn 
-    const completedBtn = document.createElement('button')
-    btnsCont.appendChild(completedBtn)
-    completedBtn.innerText = "✓"
-    completedBtn.classList.add('completed-btn')
-
-    //TODO completed todo functionality ------------
-
-    //create delete brn
+    // create del btn
     const delBtn = document.createElement('button')
-    btnsCont.appendChild(delBtn)
-    delBtn.innerText = "X"
     delBtn.classList.add('del-btn')
+    delBtn.innerText = 'X'
+    li.appendChild(delBtn)
+    
+    delBtn.onclick = (e) =>{
+        e.target.parentElement.remove()
+        deleteTodo(val)
+    }
 
-    //delete functionality
-    delBtn.onclick = (e) => {
-        const todoIndex = storedTodos.indexOf(e)
-        console.log(todoIndex)
-        storedTodos.splice(todoIndex, 1)
-        e.target.parentElement.parentElement.remove()
-        //update stored todos
-        localStorage.setItem("todos", JSON.stringify(storedTodos))
-        handleEmptyTodos()
+    hideTodosMsg()
+}
+
+// delete todo item from dom and storage
+deleteTodo = val => {
+    todosArr = JSON.parse(localStorage.getItem('todos'))
+    const todoIndex = todosArr.indexOf(val)
+    todosArr.splice(todoIndex, 1)
+    localStorage.setItem('todos', JSON.stringify(todosArr))
+
+    if (todosArr.length < 1) {
+        showTodosMsg()
     }
 }
 
-// POPULATE TODOS
-//pull todos array from local storage
-displayTodos = () => {
-    handleEmptyTodos()
-    if (storedTodos !== null) {
+// store todo items to local storage
+storeTodos = val => {
+    todosArr = JSON.parse(localStorage.getItem('todos'))
+    if (todosArr !== null) {
+        todosArr.push(val)
+        localStorage.setItem('todos', JSON.stringify(todosArr))
+    } else {
+        let todosArr = []
+        todosArr.push(val)
+        localStorage.setItem('todos', JSON.stringify(todosArr))
+    }
+}
 
-        storedTodos.forEach((todo) => {
-            createNewTodo(todo)
+// populate UI
+displayTodos = () => {
+    let todosArr = JSON.parse(localStorage.getItem('todos'))
+    if (todosArr !== null) {
+        todosArr.forEach((todo) => {
+            createTodo(todo)
+            hideTodosMsg()
         })
     } else return
 }
 
-// show the stored notes on load
-window.onload = displayTodos()
+displayTodos()
 
 // adding new todo
 todoDoneBtn.onclick = e => {
     e.preventDefault()
-    createNewTodo(todoInput.value)
-    todosArrUpdate()
+    createTodo(todoInput.value)
+    storeTodos(todoInput.value)
+    todoInput.value = ''
 }

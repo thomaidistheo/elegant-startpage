@@ -269,8 +269,7 @@ padding: 5px;
     border-left: 5px solid var(--primary-clr);
 }
 
-.todo-item .del-btn,
-.note-item .del-btn {
+.del-btn {
     margin-left: 20px;
 }
 
@@ -538,12 +537,16 @@ padding: 5px;
     transition: all 200ms ease;
 }
 
-.empty-msg-btn:hover {
+.empty-todo-btn:hover,
+.empty-note-btn:hover {
     background: var(--primary-clr);
-    color: var(--text-clr);
+   color: var(--text-clr);
 }
 
-
+.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
 
 /* * ------------------------------------------- */
 /* * MEDIA QUERIES */
