@@ -281,7 +281,7 @@ createNewTodo = (e) => {
     delBtn.onclick = (e) => {
         const todoIndex = storedTodos.indexOf(e)
         storedTodos.splice(todoIndex, 1)
-        e.target.parentElement.remove()
+        e.target.parentElement.parentElement.remove()
         //update stored todos
         localStorage.setItem("todos", JSON.stringify(storedTodos))
     }

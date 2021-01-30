@@ -114,6 +114,7 @@ button {
 
 .current-date { 
 font-size: 1rem;
+padding: 5px;
 }
 
 .search-form {
@@ -130,7 +131,7 @@ font-size: 1rem;
     outline: 0;
     padding: 5px 15px;
 
-    font-size: 0.8rem;
+    font-size: 16px;
     color: var(--primary-clr);
     background: none;
 
@@ -150,13 +151,14 @@ font-size: 1rem;
 .theme {
     background: none;
     border: none;
-    display: block;
+    padding: 5px;
 
     cursor: pointer;
 }
 
 .theme img {
     height: 30px;
+    padding-left: 20px;
 }
 
 
@@ -237,7 +239,7 @@ font-size: 1rem;
 
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    /* gap: 10px; */ /* doesn't working on iOS safari */ 
 }
 
 .todo-item, 
@@ -245,6 +247,7 @@ font-size: 1rem;
     min-height: 40px;
 
     padding: 20px;
+    margin-bottom: 10px;
     color: var(--text-clr);
     border-left: 2px solid rgb(185, 157, 98, 0.4);
 
@@ -396,7 +399,7 @@ font-size: 1rem;
     padding: 5px 15px;
     background: none;
     border: 2px solid var(--primary-clr);
-    font-size: inherit;
+    font-size: 16px;
     color: var(--primary-clr);
     outline: none;
     margin-right: 5px;
