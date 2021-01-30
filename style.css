@@ -502,84 +502,87 @@ padding: 5px;
 
 @media (max-width: 1200px) {
 
-.app-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 7fr;
-    grid-template-areas: 
-    "header"
-    "bookmarks"
-    "dashboard";
+    .app-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 7fr;
+        grid-template-areas: 
+        "header"
+        "bookmarks"
+        "dashboard";
+    }
+
+    .header {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .header-container {
+        padding: 30px 0;
+    }
+
+    .dashboard-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 40px;
+        padding-bottom: 50px;
+        padding-top: 50px;
+    }
+
+    .bookmarks-container {
+        margin-bottom: 30px;
+        padding: 20px 0;
+    }
+
+    .bookmark-input {
+        height: 32px;
+    }
+
+    .note-input-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        align-items: center;
+        gap: 0;
+    }
 }
 
-.header {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-}
-
-.header-container {
-    padding: 30px 0;
-}
-
-.dashboard-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 40px;
-    padding-bottom: 50px;
-    padding-top: 50px;
-}
-
-.bookmarks-container {
-    margin-bottom: 30px;
-    padding: 20px 0;
-}
-
-.bookmark-input {
-    height: 32px;
-}
-
-.note-input-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    align-items: center;
-    gap: 0;
-}
 
 @media (max-width: 830px) {
 
-.header {
-    grid-template-columns: 1fr;
-    padding: 0;
-    gap: 10px;
-}
+    .header {
+        grid-template-columns: 1fr;
+        padding: 0;
+        gap: 10px;
+    }
 
-.bookmarks-list ul {
-    display: grid;
-    align-items: center;
-    justify-items: center;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    .bookmarks-list ul {
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 
-    padding: 20px 0;
-}
+        padding: 20px 0;
+    }
 
-.bookmarks-list li {
-    margin-bottom: 5px;
-}
+    .bookmarks-list li {
+        margin-bottom: 5px;
+    }
 
-.bookmark-input {
-    height: 72px;
-}
+    .bookmark-input {
+        height: 72px;
+    }
 
-.todo-container {
-    margin-bottom: 30px;
-}
+    .todo-container {
+        margin-bottom: 30px;
+    }
 
-.dashboard-container {
-    padding: 0 30px 30px 30px;
+    .dashboard-container {
+        padding: 0 30px 30px 30px;
 
-    grid-template-columns: 1fr;
-    grid-template-rows: 2fr;
+        grid-template-columns: 1fr;
+        grid-template-rows: 2fr;
 
-    align-items: start;
-    justify-items: stretch;
-    gap: 0;
+        align-items: start;
+        justify-items: stretch;
+        gap: 0;
+    }
 }
