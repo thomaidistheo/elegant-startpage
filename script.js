@@ -149,8 +149,6 @@ const noteInput = document.querySelector('.note-input')
 const noteDoneBtn = document.querySelector('.note-done')
 const notesList = document.querySelector('#notes-list')
 
-
-
 // toggle text input
 newNoteBtn.onclick = () => {
     noteInputCont.classList.toggle('hidden')
@@ -177,6 +175,7 @@ createNewNote = (e) => {
     const newLi = document.createElement('li')
     newLi.innerText = e
     newLi.classList.add('note-item')
+    newLi.classList.add('li-flex')
     notesList.prepend(newLi)
 
     //create delete btn
@@ -184,7 +183,6 @@ createNewNote = (e) => {
     newLi.appendChild(delBtn)
     delBtn.innerText = "X"
     delBtn.classList.add('del-btn')
-    newLi.classList.add('li-flex')
 
     delBtn.onclick = (e) => {
         const noteIndex = storedNotes.indexOf(e)
@@ -200,7 +198,6 @@ createNewNote = (e) => {
 displayNotes = () => {
     if (storedNotes !== null) {
         storedNotes.forEach((note) => {
-            // createNewNoteArr(note)
             createNewNote(note)
         })
     } else return
@@ -217,5 +214,100 @@ noteDoneBtn.onclick = (e) => {
     } else {
         createNewNote(noteInput.value)
         notesArrUpdate()
+    }
+}
+
+
+// & ----------------------------------------------------------------
+// & TODO ----------------------------------------------------------------
+// & ----------------------------------------------------------------
+
+
+const newTodoBtn = document.querySelector('.todo-add')
+const todoInputCont = document.querySelector('.todo-input-container')
+const todoInput = document.querySelector('.todo-input')
+const todoDoneBtn = document.querySelector('.todo-done')
+const todoList = document.querySelector('#todo-list')
+
+
+// toggle text input
+newTodoBtn.onclick = () => {
+    todoInputCont.classList.toggle('hidden')
+    newTodoBtn.classList.toggle('rotate')
+}
+
+// initialize temp array and stored todos array
+let todosArr = []
+let storedTodos = JSON.parse(localStorage.getItem("todos"))
+
+//sync temp array with stored array then store updated array
+todosArrUpdate = () => {
+    if (storedTodos !== null) {
+        todosArr = storedTodos
+    }
+    todosArr.push(todoInput.value)
+    localStorage.setItem("todos", JSON.stringify(todosArr))
+    todoInput.value = ''
+}
+
+// create the todo element
+createNewTodo = (e) => {
+    //crete li element with todo text from either input value or stored todos
+    const newLi = document.createElement('li')
+    newLi.innerText = e
+    newLi.classList.add('todo-item')
+    newLi.classList.add('li-flex')
+    todoList.prepend(newLi)
+
+    //create btn container
+    const btnsCont = document.createElement('div')
+    newLi.appendChild(btnsCont)
+
+    //create completed todo btn 
+    const completedBtn = document.createElement('button')
+    btnsCont.appendChild(completedBtn)
+    completedBtn.innerText = "✓"
+    completedBtn.classList.add('completed-btn')
+
+    //TODO completed todo functionality ------------
+
+    //create delete brn
+    const delBtn = document.createElement('button')
+    btnsCont.appendChild(delBtn)
+    delBtn.innerText = "X"
+    delBtn.classList.add('del-btn')
+
+    //delete functionality
+    delBtn.onclick = (e) => {
+        const todoIndex = storedTodos.indexOf(e)
+        storedTodos.splice(todoIndex, 1)
+        e.target.parentElement.remove()
+        //update stored todos
+        localStorage.setItem("todos", JSON.stringify(storedTodos))
+    }
+}
+
+// POPULATE TODOS
+//pull todos array from local storage
+displayTodos = () => {
+    if (storedTodos !== null) {
+        storedTodos.forEach((todo) => {
+            createNewTodo(todo)
+        })
+    } else return
+}
+
+// show the stored notes on load
+window.onload = displayTodos()
+
+// adding new todo
+todoDoneBtn.onclick = e => {
+    e.preventDefault()
+    if(todoInput.value === '') {
+        todoDoneBtn.setAttribute('disabled', true)
+        todoDoneBtn.classList.add('opacity')
+    } else {
+        createNewTodo(todoInput.value)
+        todosArrUpdate()
     }
 }
