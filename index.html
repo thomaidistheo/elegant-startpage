@@ -39,17 +39,22 @@
                         <img src="/assets/todo-icon.png" alt="todo list icon">
                         <span>Tasks</span>
                     </div>
-                    <button class="todo-add">+</button>
+                    <button class="todo-add" title="Add New Task">+</button>
                 </div>
         
                 <div class="todo-container">
                     <form class="todo-input-container hidden">
                         <textarea class="todo-input"></textarea>
-                        <button class="todo-done">ADD TASK</button>
+                        <button class="todo-done" title="Add Task">ADD TASK</button>
                     </form>
                     <div class="todo-list">
                         <ul id="todo-list">
                         </ul>
+                    </div>
+                    <div class="empty-todo-msg">
+                        <p>Set some <span class="emphasis">Tasks</span>
+                        and start your day!</p>
+                        <button class="empty-todo-btn" title="Add New Task"> + </button>
                     </div>
                 </div>
             </div>
@@ -60,16 +65,21 @@
                         <img src="/assets/notes-icon.png" alt="notes list icon">
                         <span>Notes</span>
                     </div>
-                    <button class="notes-add">+</button>
+                    <button class="notes-add" title="Add New Note"> + </button>
                 </div>
                 <div class="notes-container">
                     <form class="note-input-container hidden">
                         <textarea class="note-input"></textarea>
-                        <button class="note-done">DONE</button>
+                        <button class="note-done" title="Add Note">ADD NOTE</button>
                     </form>
                     <div class="notes-list">
                         <ul id="notes-list">
                         </ul>
+                    </div>
+                    <div class="empty-note-msg">
+                        <p>Your <span class="emphasis">Notes</span> list is empty, <br>
+                        sure there must be something you need to write down! </p>
+                        <button class="empty-note-btn" title="Add New Note"> + </button>
                     </div>
                 </div>
             </div>
@@ -78,7 +88,7 @@
         <div class="bookmarks-container">
             <div class="bookmarks-list">
                  <ul id="bookmarks-list">
-                    <button class="new-bookmark-btn">+</button>
+                    <button class="new-bookmark-btn" title="Add New Bookmark">+</button>
                  </ul>
                  <form action="submit" class="bookmark-input hidden" id="bookmark-input-form">
                      <input 

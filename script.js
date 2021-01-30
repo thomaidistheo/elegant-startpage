@@ -143,14 +143,21 @@ newBookmarkCancel.onclick = () => {
 // & NOTES ----------------------------------------------------------------
 // & ----------------------------------------------------------------
 
-const newNoteBtn = document.querySelector('.notes-add')
-const noteInputCont = document.querySelector('.note-input-container')
-const noteInput = document.querySelector('.note-input')
-const noteDoneBtn = document.querySelector('.note-done')
-const notesList = document.querySelector('#notes-list')
+const newNoteBtn = document.querySelector('.notes-add') // add button
+const noteInputCont = document.querySelector('.note-input-container') // form
+const noteInput = document.querySelector('.note-input') // input 
+const noteDoneBtn = document.querySelector('.note-done') // input submit
+const notesList = document.querySelector('#notes-list') // ul 
+const emptyNotesMsg = document.querySelector('.empty-note-msg')
+const emptyNotesBtn = document.querySelector('.empty-note-btn')
 
 // toggle text input
 newNoteBtn.onclick = () => {
+    noteInputCont.classList.toggle('hidden')
+    newNoteBtn.classList.toggle('rotate')
+}
+
+emptyNotesBtn.onclick = (e) => {
     noteInputCont.classList.toggle('hidden')
     newNoteBtn.classList.toggle('rotate')
 }
@@ -159,12 +166,22 @@ newNoteBtn.onclick = () => {
 let notesArr = []
 let storedNotes = JSON.parse(localStorage.getItem("notes"))
 
+// if notes list is empty display a message
+handleEmptyNotes = () => {
+    if (storedNotes.length < 1) {
+        emptyNotesMsg.classList.remove('hidden')
+    } else {
+        emptyNotesMsg.classList.add('hidden')
+    }
+}
+
 // sync temp array with stored array then store updated array
 notesArrUpdate = () => {
     if (storedNotes !== null) {
         notesArr = storedNotes
     }
     notesArr.push(noteInput.value)
+    emptyNotesMsg.classList.add('hidden')
     localStorage.setItem("notes", JSON.stringify(notesArr))
     noteInput.value = ''
 }
@@ -190,12 +207,15 @@ createNewNote = (e) => {
         e.target.parentElement.remove()
         //update the stored notes
         localStorage.setItem("notes", JSON.stringify(storedNotes))
+
+        handleEmptyNotes()
     }
 }
 
 // POPULATE NOTES  ----------
 // pull notes array from local storage
 displayNotes = () => {
+    handleEmptyNotes()
     if (storedNotes !== null) {
         storedNotes.forEach((note) => {
             createNewNote(note)
@@ -208,13 +228,8 @@ window.onload = displayNotes()
 // adding new note
 noteDoneBtn.onclick = (e) => {
     e.preventDefault()
-    if (noteInput.value === '') {
-        noteDoneBtn.setAttribute('disabled', true)
-        noteDoneBtn.classList.add('opacity')
-    } else {
-        createNewNote(noteInput.value)
-        notesArrUpdate()
-    }
+    createNewNote(noteInput.value)
+    notesArrUpdate()
 }
 
 
@@ -228,6 +243,8 @@ const todoInputCont = document.querySelector('.todo-input-container')
 const todoInput = document.querySelector('.todo-input')
 const todoDoneBtn = document.querySelector('.todo-done')
 const todoList = document.querySelector('#todo-list')
+const emptyTodosMsg = document.querySelector('.empty-todo-msg')
+const emptyTodoBtn = document.querySelector('.empty-todo-btn')
 
 
 // toggle text input
@@ -236,9 +253,23 @@ newTodoBtn.onclick = () => {
     newTodoBtn.classList.toggle('rotate')
 }
 
+emptyTodoBtn.onclick = (e) => {
+    todoInputCont.classList.toggle('hidden')
+    newTodoBtn.classList.toggle('rotate')
+}
+
 // initialize temp array and stored todos array
 let todosArr = []
 let storedTodos = JSON.parse(localStorage.getItem("todos"))
+
+// if task list is empty display a message
+handleEmptyTodos = () => {
+    if (storedTodos.length <1) {
+        emptyTodosMsg.classList.remove('hidden')
+    } else {
+        emptyTodosMsg.classList.add('hidden')
+    }
+}
 
 //sync temp array with stored array then store updated array
 todosArrUpdate = () => {
@@ -285,13 +316,16 @@ createNewTodo = (e) => {
         e.target.parentElement.parentElement.remove()
         //update stored todos
         localStorage.setItem("todos", JSON.stringify(storedTodos))
+        handleEmptyTodos()
     }
 }
 
 // POPULATE TODOS
 //pull todos array from local storage
 displayTodos = () => {
+    handleEmptyTodos()
     if (storedTodos !== null) {
+
         storedTodos.forEach((todo) => {
             createNewTodo(todo)
         })

@@ -78,6 +78,11 @@ button {
     transform: rotate(45deg);
 }
 
+.emphasis {
+    color: var(--primary-clr);
+    border-bottom: 2px solid var(--primary-clr);
+}
+
 .app-container {
     height: 100vh;
 
@@ -509,6 +514,36 @@ padding: 5px;
     background: var(--primary-clr);
     opacity: 1;
 }
+
+.empty-todo-msg, 
+.empty-note-msg {
+    color: var(--text-clr);
+    text-align: center;
+    margin-top: 100px;
+    opacity: 0.6;
+}
+
+.empty-todo-btn,
+.empty-note-btn {
+    background: none;
+    border: 1px solid var(--primary-clr);
+    color: var(--primary-clr);
+    font-size: 16px;
+
+    margin-top: 20px;
+    padding: 5px 10px;
+
+    cursor: pointer;
+
+    transition: all 200ms ease;
+}
+
+.empty-msg-btn:hover {
+    background: var(--primary-clr);
+    color: var(--text-clr);
+}
+
+
 
 /* * ------------------------------------------- */
 /* * MEDIA QUERIES */
