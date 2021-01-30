@@ -280,6 +280,7 @@ createNewTodo = (e) => {
     //delete functionality
     delBtn.onclick = (e) => {
         const todoIndex = storedTodos.indexOf(e)
+        console.log(todoIndex)
         storedTodos.splice(todoIndex, 1)
         e.target.parentElement.parentElement.remove()
         //update stored todos
@@ -303,11 +304,6 @@ window.onload = displayTodos()
 // adding new todo
 todoDoneBtn.onclick = e => {
     e.preventDefault()
-    if(todoInput.value === '') {
-        todoDoneBtn.setAttribute('disabled', true)
-        todoDoneBtn.classList.add('opacity')
-    } else {
-        createNewTodo(todoInput.value)
-        todosArrUpdate()
-    }
+    createNewTodo(todoInput.value)
+    todosArrUpdate()
 }

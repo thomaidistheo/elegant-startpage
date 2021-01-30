@@ -301,6 +301,11 @@ padding: 5px;
     margin-bottom: 10px;
 }
 
+.todo-input input,
+.note-input input {
+    font-size: 16px;
+}
+
 .todo-done,
 .note-done {
     height: 30px;
@@ -325,6 +330,14 @@ padding: 5px;
 }
 /* & ------------------------------------------- */
 /* & TODO */
+
+.todo-item:hover {
+    opacity: 1;
+}
+
+.todo-input {
+    height: 40px;
+}
 
 
 /* & ------------------------------------------- */
