@@ -471,11 +471,11 @@ padding: 5px;
 
 .del-btn {
     color: var(--text-clr);
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     background: none;
     border: 1px solid var(--primary-clr);
-    height: 15px;
-    width: 15px;
+    height: 20px;
+    width: 20px;
     opacity: 0.3;
 
     justify-self: flex-end;
@@ -490,12 +490,12 @@ padding: 5px;
 }
 
 .completed-btn {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     color: var(--primary-clr);
     background: none;
     border: 1px solid var(--primary-clr);
-    height: 15px;
-    width: 15px;
+    height: 20px;
+    width: 20px;
     opacity: 0.3;
 
     justify-self: flex-end;
