@@ -91,13 +91,26 @@ button {
     height: 100vh;
 
     display: grid;
-    grid-template-rows: 1fr 3fr 1fr;
+    grid-template-rows: 5fr 6fr 5fr 1fr;
     grid-template-areas: 
     "header"
     "dashboard"
-    "bookmarks";
+    "bookmarks"
+    "footer";
     align-items: center;
 }
+
+.footer {
+    color: var(--text-clr);
+    grid-area: footer;
+    font-size: 12px;
+    opacity: 0.2;
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 
 /* ^ ------------------------------------------- */
 /* ^ HEADER */
@@ -237,7 +250,7 @@ padding: 5px;
 
 .todo-title-text img,
 .notes-title-text img {
-    width: 25px;
+    width: 20px;
     height: auto;
 }
 
@@ -597,11 +610,12 @@ padding: 5px;
 
     .app-container {
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 7fr;
+        grid-template-rows: 1fr 1fr 7fr 1fr;
         grid-template-areas: 
         "header"
         "bookmarks"
-        "dashboard";
+        "dashboard"
+        "footer";
     }
 
     .header {
@@ -635,6 +649,10 @@ padding: 5px;
         grid-template-rows: 1fr;
         align-items: center;
         gap: 0;
+    }
+
+    .footer {
+        display: none;
     }
 }
 
