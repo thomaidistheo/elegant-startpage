@@ -281,20 +281,33 @@ createTodo = (val) => {
     li.innerText = val
     li.classList.add('todo-item')
     li.classList.add('li-flex')
+    const btns = document.createElement('div')
+    btns.classList.add('li-flex')
+    li.appendChild(btns)
     todoList.prepend(li)
+
+    hideTodosMsg()
 
     // create del btn
     const delBtn = document.createElement('button')
     delBtn.classList.add('del-btn')
     delBtn.innerText = 'X'
-    li.appendChild(delBtn)
+    btns.appendChild(delBtn)
     
-    delBtn.onclick = (e) =>{
+    delBtn.onclick = (e) => {
         e.target.parentElement.remove()
         deleteTodo(val)
     }
 
-    hideTodosMsg()
+    // create complete btn 
+    const completeBtn = document.createElement('button')
+    completeBtn.classList.add('completed-btn')
+    completeBtn.innerText = '✓'
+    btns.appendChild(completeBtn)
+
+    completeBtn.onclick = (e) => {
+        e.target.parentElement.parentElement.classList.toggle('completed')
+    }
 }
 
 // delete todo item from dom and storage
@@ -307,6 +320,18 @@ deleteTodo = val => {
     if (todosArr.length < 1) {
         showTodosMsg()
     }
+}
+
+// complete todo item 
+completeTodo = val => {
+    todosArr = JSON.parse(localStorage.getItem('todos'))
+    const todoIndex = todosArr.indexOf(val)
+    temp = todosArr.splice(todoIndex, 1)
+    let completedTodosArr = []
+    completedTodosArr.push(temp)
+
+    localStorage.setItem('todos', JSON.stringify(todosArr))
+    localStorage.setItem('completed', JSON.stringify(completedTodosArr))
 }
 
 // store todo items to local storage
