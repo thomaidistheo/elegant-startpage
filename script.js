@@ -330,7 +330,7 @@ createCompleted = (val) => {
     const btns = document.createElement('div')
     btns.classList.add('li-flex')
     li.appendChild(btns)
-    completedList.appendChild(li)
+    completedList.prepend(li)
 
     // create del btn
     const delBtn = document.createElement('button')
@@ -383,12 +383,14 @@ completeTodo = val => {
 
     if (completedArr !== null) {
         completedArr.push(todosArr.splice(todoIndex, 1)[0])
+        localStorage.setItem('todos', JSON.stringify(todosArr))
+        localStorage.setItem('completed', JSON.stringify(completedArr))
     } else {
         let completedArr = []
         completedArr.push(todosArr.splice(todoIndex, 1)[0])
+        localStorage.setItem('todos', JSON.stringify(todosArr))
+        localStorage.setItem('completed', JSON.stringify(completedArr))
     }
-    localStorage.setItem('todos', JSON.stringify(todosArr))
-    localStorage.setItem('completed', JSON.stringify(completedArr))
 }
 
 // move completed back to todo
