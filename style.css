@@ -78,6 +78,10 @@ button {
     transform: rotate(45deg);
 }
 
+.error {
+    border: 1px solid var(--error-clr)!important;
+}
+
 .emphasis {
     color: var(--primary-clr);
     border-bottom: 2px solid var(--primary-clr);
@@ -237,14 +241,21 @@ padding: 5px;
     height: auto;
 }
 
+.todo-list {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .todo-list ul,
 .notes-list ul {
     list-style-type: none;
     padding: 0;
 
-    display: flex;
-    flex-direction: column;
-    /* gap: 10px; */ /* doesn't working on iOS safari */ 
+
+    gap: 10px; 
 }
 
 .todo-item, 
@@ -281,6 +292,12 @@ padding: 5px;
     font-size: 1.5rem;
     cursor: pointer;
     transform: rotatte(0deg)
+}
+
+.todo-add img,
+.notes-add img {
+    height: 15px;
+
 }
 
 .todo-input-container,
@@ -343,7 +360,24 @@ padding: 5px;
     height: 40px;
 }
 
+.seperator {
+    margin-bottom: 10px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
 
+.seperator-line {
+    background: var(--primary-clr);
+    width: 140px;
+    height: 1px;
+}
+
+.seperator-text {
+    color: var(--primary-clr);
+    padding: 0 10px;
+}
 /* & ------------------------------------------- */
 /* & NOTES */
 
@@ -496,7 +530,7 @@ padding: 5px;
 .completed-btn {
     height: 20px;
     width: 20px;
-    
+
     margin-left: 10px;
 
     font-size: 0.65rem;
@@ -544,6 +578,11 @@ padding: 5px;
 .empty-note-btn:hover {
     background: var(--primary-clr);
    color: var(--text-clr);
+}
+
+.empty-todo-btn img,
+.empty-note-btn img {
+    height: 10px;
 }
 
 .completed {

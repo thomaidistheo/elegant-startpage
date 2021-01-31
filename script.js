@@ -181,6 +181,8 @@ createNote = (val) => {
     li.classList.add('li-flex')
     notesList.prepend(li)
 
+    hideNotesMsg()
+
     // create del btn
     const delBtn = document.createElement('button')
     delBtn.classList.add('del-btn')
@@ -191,8 +193,6 @@ createNote = (val) => {
         e.target.parentElement.remove()
         deleteNote(val)
     }
-
-    hideNotesMsg()
 }
 
 // delete note item 
@@ -209,7 +209,7 @@ deleteNote = val => {
 
 // store note items to local storage
 storeNotes = val => {
-    notesArr = JSON.parse(localStorage.getItem('item'))
+    notesArr = JSON.parse(localStorage.getItem('notes'))
     if (notesArr !== null) {
         notesArr.push(val)
         localStorage.setItem('notes', JSON.stringify(notesArr))
@@ -236,22 +236,29 @@ displayNotes()
 // adding new note 
 noteDoneBtn.onclick = e => {
     e.preventDefault()
-    createNote(noteInput.value)
-    storeNotes(noteInput.value)
+    if (noteInput.value !== '') {
+        createNote(noteInput.value)
+        storeNotes(noteInput.value)  
+        noteInput.value = ''
+        noteInput.classList.remove('error')      
+    } else {
+        noteInput.classList.add('error')
+    }
 }
 
 // & ----------------------------------------------------------------
 // & TODO ----------------------------------------------------------------
 // & ----------------------------------------------------------------
 
-
 const newTodoBtn = document.querySelector('.todo-add')
 const todoInputCont = document.querySelector('.todo-input-container')
 const todoInput = document.querySelector('.todo-input')
 const todoDoneBtn = document.querySelector('.todo-done')
 const todoList = document.querySelector('#todo-list')
+const completedList = document.querySelector('#completed-list')
 const emptyTodosMsg = document.querySelector('.empty-todo-msg')
 const emptyTodosBtn = document.querySelector('.empty-todo-btn')
+
 
 // toggle text input
 newTodoBtn.onclick = () => {
@@ -284,7 +291,7 @@ createTodo = (val) => {
     const btns = document.createElement('div')
     btns.classList.add('li-flex')
     li.appendChild(btns)
-    todoList.prepend(li)
+    todoList.appendChild(li)
 
     hideTodosMsg()
 
@@ -295,7 +302,7 @@ createTodo = (val) => {
     btns.appendChild(delBtn)
     
     delBtn.onclick = (e) => {
-        e.target.parentElement.remove()
+        e.target.parentElement.parentElement.remove()
         deleteTodo(val)
     }
 
@@ -306,7 +313,46 @@ createTodo = (val) => {
     btns.appendChild(completeBtn)
 
     completeBtn.onclick = (e) => {
-        e.target.parentElement.parentElement.classList.toggle('completed')
+        completeTodo(val)
+        createCompleted(val)
+        e.target.parentElement.parentElement.remove()
+    }
+}
+
+// create completed todo item 
+createCompleted = (val) => {
+    // create li
+    const li = document.createElement('li')
+    li.innerText = val
+    li.classList.add('todo-item')
+    li.classList.add('li-flex')
+    li.classList.add('completed')
+    const btns = document.createElement('div')
+    btns.classList.add('li-flex')
+    li.appendChild(btns)
+    completedList.appendChild(li)
+
+    // create del btn
+    const delBtn = document.createElement('button')
+    delBtn.classList.add('del-btn')
+    delBtn.innerText = 'X'
+    btns.appendChild(delBtn)
+    
+    delBtn.onclick = (e) => {
+        e.target.parentElement.parentElement.remove()
+        deleteCompleted(val)
+    }
+
+    // create undo button
+    const undoBtn = document.createElement('button')
+    undoBtn.classList.add('completed-btn')
+    undoBtn.innerText = '✓'
+    btns.appendChild(undoBtn)
+
+    undoBtn.onclick = (e) => {
+        undoTodo(val)
+        createTodo(val)
+        e.target.parentElement.parentElement.remove()
     }
 }
 
@@ -322,16 +368,43 @@ deleteTodo = val => {
     }
 }
 
+deleteCompleted = val => {
+    completedArr = JSON.parse(localStorage.getItem('completed'))
+    const todoIndex = completedArr.indexOf(val)
+    completedArr.splice(todoIndex, 1)
+    localStorage.setItem('completed', JSON.stringify(completedArr))
+}
+
 // complete todo item 
 completeTodo = val => {
     todosArr = JSON.parse(localStorage.getItem('todos'))
+    completedArr = JSON.parse(localStorage.getItem('completed'))
     const todoIndex = todosArr.indexOf(val)
-    temp = todosArr.splice(todoIndex, 1)
-    let completedTodosArr = []
-    completedTodosArr.push(temp)
 
+    if (completedArr !== null) {
+        completedArr.push(todosArr.splice(todoIndex, 1)[0])
+    } else {
+        let completedArr = []
+        completedArr.push(todosArr.splice(todoIndex, 1)[0])
+    }
     localStorage.setItem('todos', JSON.stringify(todosArr))
-    localStorage.setItem('completed', JSON.stringify(completedTodosArr))
+    localStorage.setItem('completed', JSON.stringify(completedArr))
+}
+
+// move completed back to todo
+undoTodo = val => {
+    todosArr = JSON.parse(localStorage.getItem('todos'))
+    completedArr = JSON.parse(localStorage.getItem('completed'))
+    const todoIndex = completedArr.indexOf(val)
+
+    if (todosArr !== null) {
+        todosArr.push(completedArr.splice(todoIndex, 1)[0])
+    } else {
+        let todosArr = []
+        todosArr.push(completedArr.splice(todoIndex, 1)[0])
+    }
+    localStorage.setItem('todos', JSON.stringify(todosArr))
+    localStorage.setItem('completed', JSON.stringify(completedArr))
 }
 
 // store todo items to local storage
@@ -356,6 +429,13 @@ displayTodos = () => {
             hideTodosMsg()
         })
     } else return
+
+    let completedArr = JSON.parse(localStorage.getItem('completed'))
+    if (completedArr !== null) {
+        completedArr.forEach((completed) => {
+            createCompleted(completed)
+        })
+    }
 }
 
 displayTodos()
@@ -363,7 +443,13 @@ displayTodos()
 // adding new todo
 todoDoneBtn.onclick = e => {
     e.preventDefault()
-    createTodo(todoInput.value)
-    storeTodos(todoInput.value)
-    todoInput.value = ''
+    if (todoInput.value !== '') {
+        createTodo(todoInput.value)
+        storeTodos(todoInput.value)
+        todoInput.value = ''
+        todoInput.classList.remove('error')
+    } else {
+        todoInput.classList.add('error')
+    }
+
 }

@@ -26,7 +26,7 @@
                 </form>
                 <div class="date-theme">
                     <div class="current-date"></div>
-                    <button class="theme"><img src=assets/sun.png alt=""/></button>
+                    <button class="theme"><img draggable="false" src=assets/sun.png alt=""/></button>
                 </div>
             </div>
         </div>
@@ -39,33 +39,43 @@
                         <img src="/assets/todo-icon.png" alt="todo list icon">
                         <span>Tasks</span>
                     </div>
-                    <button class="todo-add" title="Add New Task">+</button>
+                    <button class="todo-add" title="Add New Task">
+                        <img draggable="false" src="assets/plus-icon.png" alt="add task icon">
+                    </button>
                 </div>
         
                 <div class="todo-container">
                     <form class="todo-input-container hidden">
                         <textarea class="todo-input"></textarea>
-                        <button class="todo-done" title="Add Task">ADD TASK</button>
+                        <button class="todo-done" title="Add Task" draggable="false">ADD TASK</button>
                     </form>
                     <div class="todo-list">
+                        <div class="empty-todo-msg">
+                            <p>Set some <span class="emphasis">Tasks</span>
+                            and start your day!</p>
+                            <button class="empty-todo-btn" title="Add New Task"> <img draggable="false" src="assets/plus-icon.png" alt="add task icon"> </button>
+                        </div>
                         <ul id="todo-list">
                         </ul>
+                        <div class="seperator">
+                            <div class="seperator-line"></div>
+                            <div class="seperator-text">✓</div>
+                            <div class="seperator-line"></div>
+                        </div>
+                        <ul id="completed-list">
+                        </ul>
                     </div>
-                    <div class="empty-todo-msg">
-                        <p>Set some <span class="emphasis">Tasks</span>
-                        and start your day!</p>
-                        <button class="empty-todo-btn" title="Add New Task"> + </button>
-                    </div>
+
                 </div>
             </div>
         
             <div>
                 <div class="notes-title">
                     <div class="notes-title-text">
-                        <img src="/assets/notes-icon.png" alt="notes list icon">
+                        <img draggable="false" src="/assets/notes-icon.png" alt="add note icon">
                         <span>Notes</span>
                     </div>
-                    <button class="notes-add" title="Add New Note"> + </button>
+                    <button class="notes-add" title="Add New Note"> <img draggable="false" src="assets/plus-icon.png" alt="add note icon"> </button>
                 </div>
                 <div class="notes-container">
                     <form class="note-input-container hidden">
