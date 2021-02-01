@@ -83,7 +83,7 @@ const createBookmarksArr = () => {
             const linkText = document.createTextNode(bookmark)
     
             newA.appendChild(linkText)
-            newA.setAttribute("href", `//www.${linkText.data}`)
+            newA.setAttribute("href", `www.${linkText.data}`)
             newA.setAttribute("target", "_blank")
             newA.innerHTML = linkText.data.split(".", 1).pop() // remove www and .com
             newLi.appendChild(newA)

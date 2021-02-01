@@ -309,9 +309,7 @@ padding: 5px;
 .todo-add img,
 .notes-add img {
     height: 15px;
-
 }
-
 .todo-input-container,
 .note-input-container {
     width: 100%;
@@ -431,7 +429,7 @@ padding: 5px;
     border: 1px solid var(--primary-clr);
     outline: 1px solid var(--primary-clr);
     outline-offset: -1px;
-    padding: 2px 12px 5px 12px;
+    padding: 5px 10px;
     cursor: pointer; 
     color: var(--primary-clr);
     text-transform: uppercase;
@@ -446,6 +444,11 @@ padding: 5px;
     color: var(--text-clr);
     outline-offset: 3px;
     opacity: 1;
+}
+
+.new-bookmark-btn img {
+    height: 10px;
+    width: auto;
 }
 
 .bookmark-input {
