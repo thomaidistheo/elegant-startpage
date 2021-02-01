@@ -78,14 +78,13 @@ const createBookmarksArr = () => {
 
     if (storedBookmarks !== null) {
         storedBookmarks.forEach((bookmark) => {
-            const newLi = document.createElement('li')
-            const newA = document.createElement('a')
-            const linkText = document.createTextNode(bookmark)
+            let newLi = document.createElement('li')
+            let newA = document.createElement('a')
     
-            newA.appendChild(linkText)
-            newA.setAttribute("href", `www.${linkText.data}`)
+            newA.href = `https://www.${bookmark}`
             newA.setAttribute("target", "_blank")
-            newA.innerHTML = linkText.data.split(".", 1).pop() // remove www and .com
+            newA.innerHTML = bookmark.split(".", 1).pop() // remove .com
+            
             newLi.appendChild(newA)
             
             // delete button
