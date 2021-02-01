@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+    "name": "Elegant Startage | New Tab",
+    "description": "An elegant and powerful startpage.",
+    "version": "1.0",
+    "chrome_url_overrides": {
+        "newtab": "index.html"
+    },
+    "browser_action": {
+        "default_icon": "/assets/96x96_icon.png"
+    },
+    "permission": [
+        "tabs"
+    ],
+    "background": {
+        "scripts": [
+            "script.js"
+        ],
+        "persistent": false
+    }
+}
