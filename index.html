@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="light">
-
+    <!-- Version: 1.3 -->
     <div class="app-container">
         <div class="header-container">
             <div class="header">
@@ -39,7 +39,7 @@
     
         <div class="dashboard-container">
 
-            <div>
+            
                 <div class="todo-container">
                     <div class="todo-title">
                         <div class="todo-title-text">
@@ -73,9 +73,9 @@
                     </div>
 
                 </div>
-            </div>
+            
         
-            <div>
+            
                 <div class="notes-container">
                     <div class="notes-title">
                         <div class="notes-title-text">
@@ -90,16 +90,16 @@
                         <button class="note-done" title="Add Note">ADD NOTE</button>
                     </form>
                     <div class="notes-list">
+                        <div class="empty-note-msg">
+                            <p>Your <span class="emphasis">Notes</span> list is empty, <br>
+                            sure there must be something you need to write down! </p>
+                            <button class="empty-note-btn" title="Add New Note"> <img draggable="false" src="assets/plus-icon.png" alt="add note icon"> </button>
+                        </div>
                         <ul id="notes-list">
                         </ul>
                     </div>
-                    <div class="empty-note-msg">
-                        <p>Your <span class="emphasis">Notes</span> list is empty, <br>
-                        sure there must be something you need to write down! </p>
-                        <button class="empty-note-btn" title="Add New Note"> <img draggable="false" src="assets/plus-icon.png" alt="add note icon"> </button>
-                    </div>
                 </div>
-            </div>
+            
         </div>
     
         <div class="bookmarks-container">
@@ -120,9 +120,6 @@
                 </form>
             </div>
          </div>
-         <footer class="footer">
-             <p>Elegant Startpage&copy; | Thodoris Thomaidis | 2021</p>
-         </footer>
     </div>
 
 
