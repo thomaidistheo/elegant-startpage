@@ -256,11 +256,9 @@ padding: 5px;
     height: auto;
 }
 
-.todo-list {
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.todo-list,
+.notes-list {
+    height: 400px;
 }
 
 .todo-list ul,
@@ -310,6 +308,7 @@ padding: 5px;
 .notes-add img {
     height: 15px;
 }
+
 .todo-input-container,
 .note-input-container {
     width: 100%;
@@ -604,6 +603,8 @@ padding: 5px;
     text-decoration: line-through;
     opacity: 0.6;
 }
+
+
 
 /* * ------------------------------------------- */
 /* * MEDIA QUERIES */

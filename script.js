@@ -34,9 +34,9 @@ let day = today.getDate() + " " + monthNames[today.getMonth()] + " " + today.get
 let dateTime = document.querySelector('.current-date')
 let welcomeMsg = document.querySelector('.welcome-msg')
 function time() {
-    var d = new Date();
-    var m = d.getMinutes();
-    var h = d.getHours();
+    var d = new Date()
+    var m = d.getMinutes()
+    var h = d.getHours()
     dateTime.textContent = 
     day + " // " + ("0" + h).substr(-2) + ":" + ("0" + m).substr(-2)
 
@@ -47,7 +47,7 @@ function time() {
     }
   }
   
-  setInterval(time, 1000);
+  setInterval(time, 1000)
 
 // & ----------------------------------------------------------------
 // & ADD BOOKMARKS ----------------------------------------------------------------
@@ -60,7 +60,7 @@ const newBookmarkForm = document.getElementById("bookmark-input-form") // form
 const newBookmarkInput = document.getElementById("bookmark-input") // form input
 const bookmarkList = document.getElementById("bookmarks-list") // ul 
 
-let index;
+let index
 
 let bookmarksArr = []
 
@@ -73,7 +73,6 @@ const inputArr = () => {
 
 // Creates bookmark LIs using the stored bookmarks array
 const createBookmarksArr = () => {
-
     const storedBookmarks = JSON.parse(localStorage.getItem("bookmarks"))
 
     if (storedBookmarks !== null) {
@@ -107,9 +106,7 @@ const createBookmarksArr = () => {
              
             bookmarksArr = storedBookmarks
         })
-
     } else return
-
 }
 
 // Runs when page loads to populate the bookmarks section using the stored local storage
