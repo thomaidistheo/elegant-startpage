@@ -90,11 +90,11 @@ button {
 .app-container {
     height: 100vh;
     display: grid;
-    grid-template-rows: 80px 550px 20px;
+    grid-template-rows: 1fr 1fr 3fr;
     grid-template-areas: 
     "header"
-    "dashboard"
-    "bookmarks";
+    "bookmarks"
+    "dashboard";
     align-items: center;
     gap: 50px;
     padding-top: 10px;
@@ -198,6 +198,7 @@ padding: 5px;
     gap: 50px;
 
     padding: 0 100px;
+    padding-bottom: 50px;
 }
 
 .todo-container,
@@ -235,6 +236,7 @@ padding: 5px;
 
     position: sticky;
     top: 0;
+    z-index: 999;
 }
 
 .todo-title-text,
@@ -264,7 +266,7 @@ padding: 5px;
 .todo-list ul,
 .notes-list ul {
     list-style-type: none;
-    padding: 10px 10px;;
+    padding: 10px 10px;
 }
 
 .todo-item, 
@@ -610,12 +612,11 @@ padding: 5px;
 
     .app-container {
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 7fr 1fr;
+        grid-template-rows: 1fr 7fr 1fr;
         grid-template-areas: 
         "header"
         "bookmarks"
         "dashboard"
-        "footer";
     }
 
     .header {
@@ -644,6 +645,15 @@ padding: 5px;
         height: 32px;
     }
 
+    .todo-container {
+        margin-bottom: 30px;
+    }
+
+    .todo-list,
+    .notes-list {
+        height: 400px;
+    }
+
     .note-input-container {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
@@ -659,15 +669,27 @@ padding: 5px;
 
 @media (max-width: 830px) {
 
+    .header-container {
+        padding-bottom: 0;
+    }
+
     .header {
         grid-template-columns: 1fr;
         padding: 0;
         gap: 10px;
     }
 
+    .bookmarks-container { 
+        padding: 0;
+        margin: 0;
+    }
+
+    .bookmarks-btn-container {
+        width: 100px;
+    }
+
     .bookmarks-list ul {
         display: grid;
-        align-items: center;
         justify-items: center;
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 
@@ -676,6 +698,15 @@ padding: 5px;
 
     .bookmarks-list li {
         margin-bottom: 5px;
+        width: 100px;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+    
+    .del-btn { 
+        padding: 0;
+        margin: 0;
     }
 
     .bookmark-input {
@@ -686,6 +717,11 @@ padding: 5px;
         margin-bottom: 30px;
     }
 
+    .todo-list,
+    .notes-list {
+        height: 400px;
+    }
+
     .dashboard-container {
         padding: 0 30px 30px 30px;
 
@@ -694,25 +730,13 @@ padding: 5px;
 
         align-items: start;
         justify-items: stretch;
-        gap: 0;
+        gap: 40px;
     }
 }
 
-@media (max-height: 820px) {
-    /* .app-container {
-        height: 100vh;
-        grid-template-areas: 
-        "header"
-        "bookmarks"
-        "dashboard"
-        "footer";
+/* low res screens (laptops and such) */
+@media (max-height: 900px) {
+    .app-container {
+        grid-template-rows: 80px 20px 600px;
     }
-
-    .dashboard-container {
-        background: red;
-    }
-    .header {
-        margin-top: 30px;
-    } */
-
 }
