@@ -612,7 +612,7 @@ padding: 5px;
 
     .app-container {
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 7fr 1fr;
+        grid-template-rows: 1fr 1fr 7fr;
         grid-template-areas: 
         "header"
         "bookmarks"
@@ -668,6 +668,10 @@ padding: 5px;
 
 
 @media (max-width: 830px) {
+
+    .app-container {
+        grid-template-rows: 1fr 1fr 7fr!important;
+    }
 
     .header-container {
         padding-bottom: 0;
