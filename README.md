@@ -4,7 +4,13 @@ Available as an extension for Chrome and Firefox. <br>
 Latest Version: 1.6.3 <br>
 
 Download: <a href="https://elegant-sp.netlify.app">here</a> <br>
-Direct links: <a href="https://chrome.google.com/webstore/detail/elegant-startage-new-tab/fkmdkhphahhokkbocjgdpoeikggpnfel?hl=el">Chrome - (v1.1)</a> | <a href="https://addons.mozilla.org/en-US/firefox/addon/elegant-startage-new-tab/"> Firefox - (v1.6.3)</a>
+Direct links: 
+<a href="https://chrome.google.com/webstore/detail/elegant-startage-new-tab/odgeaoeiadnifppkijkaiiafbcendbhd?hl=en&authuser=0">
+    Chrome - (v1.6.3)
+</a> | 
+<a href="https://addons.mozilla.org/en-US/firefox/addon/elegant-startage-new-tab/"> 
+    Firefox - (v1.6.3)
+</a>
 
 <img src="https://raw.githubusercontent.com/thomaidistheo/elegant-startpage/main/assets/screenshots/theme-screenshot.png">
 
