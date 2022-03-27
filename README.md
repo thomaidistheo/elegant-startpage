@@ -19,3 +19,11 @@ Direct links:
 
 <img src="https://raw.githubusercontent.com/thomaidistheo/elegant-startpage/main/assets/screenshots/light_mode_screenshot.jpg">
 
+
+
+<h2> Changelog </h2>
+
+<p>v1.6.4:</p>
+<ul>
+    <li>Startpage now automatically detects the browser's theme and sets the same theme for the plugin on first load. It can still be changed manually and the browser will remember the changes upon reload.</li>
+</ul> 

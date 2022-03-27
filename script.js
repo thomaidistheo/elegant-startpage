@@ -4,8 +4,13 @@
 
 const themeToggle = document.querySelector('.theme')
 const body = document.body
-themeToggle.onclick = () => {
-    if (body.classList.contains('light')) {
+
+// load theme from localStorage
+const theme = localStorage.getItem('theme')
+
+// detect browser theme (light or dark)
+let detectTheme = () => {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         body.classList.remove('light')
         body.classList.add('dark')
         localStorage.setItem('theme', 'dark')
@@ -16,11 +21,31 @@ themeToggle.onclick = () => {
     }
 }
 
-// LOAD THEME FROM LOCALSTORAGE ----------------------------------------------------------------
-const theme = localStorage.getItem('theme')
+let setTheme = () => {
+    if (theme) {
+        body.classList.add(theme)
+        console.log(`${theme} theme loaded from memory`)
+    } else {
+        console.log('theme set automatically based on browser theme')
+        detectTheme()
+    }
+}
 
-if (theme) {
-    body.classList.add(theme)
+document.addEventListener('DOMContentLoaded', () => {
+    setTheme()
+})
+
+
+themeToggle.onclick = () => {
+    if (body.classList.contains('light')) {
+        body.classList.remove('light')
+        body.classList.add('dark')
+        localStorage.setItem('theme', 'dark')
+    } else {
+        body.classList.remove('dark')
+        body.classList.add('light')
+        localStorage.setItem('theme', 'light')
+    }
 }
 
 // & ----------------------------------------------------------------
